@@ -11,3 +11,14 @@ export default function TasksPage({ tasks = [] }) {
     </main>
   );
 }
+
+export async function getServerSideProps() {
+  const response = await fetch(process.env.NEXT_PUBLIC_TASKS_API_URL);
+  const tasks = await response.json();
+
+  return {
+    props: {
+      tasks,
+    },
+  };
+}
