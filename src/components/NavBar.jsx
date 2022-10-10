@@ -21,7 +21,6 @@ export default function NavBar() {
       <Link href="/">Home</Link>
       <Link href="/tasks">Tasks</Link>
       <Link href="/tasks/create">Create Task</Link>
-      <Link href="/tasks/create">Update Task</Link>
     </STNav>
   );
 }
