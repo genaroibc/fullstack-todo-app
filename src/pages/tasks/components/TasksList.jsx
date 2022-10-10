@@ -10,11 +10,15 @@ const STContainer = styled.section`
   padding: 1rem;
 `;
 
-export function TasksList({ tasks = [] }) {
+export function TasksList({ tasks = [], handleDelete }) {
   return (
     <STContainer>
       {tasks.map(task => (
-        <TaskCard key={uuid()} {...task} />
+        <TaskCard
+          key={uuid()}
+          handleDelete={() => handleDelete(task._id)}
+          {...task}
+        />
       ))}
     </STContainer>
   );

@@ -1,13 +1,19 @@
+import { deleteTask } from "services/deleteTask";
 import { TasksList } from "./components/TasksList";
 
 export default function TasksPage({ tasks = [] }) {
+  const handleDelete = async task_id => {
+    const response = await deleteTask(task_id);
+    if (!response.ok) console.error(response);
+  };
+
   return (
     <main>
       <h1>Tasks list:</h1>
 
-      <TasksList tasks={tasks} />
+      <TasksList tasks={tasks} handleDelete={handleDelete} />
 
-      {!tasks.lenght && <h3>No tasks yet...</h3>}
+      {tasks.lenght && <h3>No tasks yet...</h3>}
     </main>
   );
 }

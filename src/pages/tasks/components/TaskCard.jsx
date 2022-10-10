@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 const STCard = styled.article`
@@ -11,21 +12,23 @@ const STCard = styled.article`
 `;
 
 const STButton = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
+  margin: 0.4rem;
 
-  margin: 1rem;
+  background-color: ${({ bgCol }) => bgCol || "initial"};
 
-  background-color: tomato;
   color: #fff;
 `;
 
-export function TaskCard({ title = "" }) {
+export function TaskCard({ title, handleDelete }) {
   return (
     <STCard>
       <h3>{title}</h3>
-      <STButton>Add</STButton>
+      <STButton onClick={handleDelete} bgCol="#c80000">
+        DELETE
+      </STButton>
+      <Link href="/tasks/edit">
+        <STButton bgCol="#004fe2">EDIT</STButton>
+      </Link>
     </STCard>
   );
 }
