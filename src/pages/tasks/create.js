@@ -1,3 +1,5 @@
+import { TaskForm } from "./components/TaskForm";
+
 export default function CreatePage() {
-  return <div>Create Task</div>;
+  return <TaskForm />;
 }
