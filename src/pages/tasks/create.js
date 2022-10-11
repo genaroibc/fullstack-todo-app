@@ -5,7 +5,7 @@ import { TaskForm } from "./components/TaskForm";
 const TASK_DESCRIPTION_NAME = "task-description";
 const TASK_TITLE_NAME = "task-title";
 
-const inputsName = {
+const inputNames = {
   description: TASK_DESCRIPTION_NAME,
   title: TASK_TITLE_NAME,
 };
@@ -28,7 +28,7 @@ export default function CreatePage() {
 
   return (
     <>
-      <TaskForm inputsName={inputsName} handleSubmit={handleSubmit} />
+      <TaskForm inputNames={inputNames} handleSubmit={handleSubmit} />
       <h3>{tasksStatus}</h3>
     </>
   );

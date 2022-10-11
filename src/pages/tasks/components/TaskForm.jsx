@@ -28,24 +28,26 @@ const STInput = styled.input`
   color: #fff;
 `;
 
-export function TaskForm({ handleSubmit, inputsName }) {
+export function TaskForm({ handleSubmit, inputNames = {}, inputValues = {} }) {
   return (
     <STForm onSubmit={handleSubmit}>
-      <label htmlFor={inputsName.title}>Title</label>
+      <label htmlFor={inputNames.title}>Title</label>
       <STInput
         minLength={6}
         type="text"
-        name={inputsName.title}
-        id={inputsName.title}
+        name={inputNames.title}
+        id={inputNames.title}
         required={true}
+        defaultValue={inputValues.title}
       />
 
-      <label htmlFor={inputsName.description}>Description (optional)</label>
+      <label htmlFor={inputNames.description}>Description (optional)</label>
       <STTextArea
         rows={10}
         type="text"
-        name={inputsName.description}
-        id={inputsName.description}
+        name={inputNames.description}
+        id={inputNames.description}
+        defaultValue={inputValues.description}
       />
       <button type="submit">Create task</button>
     </STForm>

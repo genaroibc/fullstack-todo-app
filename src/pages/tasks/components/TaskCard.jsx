@@ -19,14 +19,15 @@ const STButton = styled.button`
   color: #fff;
 `;
 
-export function TaskCard({ title, handleDelete }) {
+export function TaskCard({ title, description, _id, handleDelete }) {
   return (
     <STCard>
       <h3>{title}</h3>
+      <p>{description}</p>
       <STButton onClick={handleDelete} bgCol="#c80000">
         DELETE
       </STButton>
-      <Link href="/tasks/edit">
+      <Link href={`/tasks/${_id}`}>
         <STButton bgCol="#004fe2">EDIT</STButton>
       </Link>
     </STCard>
