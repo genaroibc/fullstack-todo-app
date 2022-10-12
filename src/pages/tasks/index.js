@@ -56,6 +56,7 @@ export default function TasksPage({ tasks = [] }) {
 }
 
 export async function getServerSideProps() {
+  console.log("url:", process.env.NEXT_PUBLIC_TASKS_API_URL);
   const response = await fetch(process.env.NEXT_PUBLIC_TASKS_API_URL);
   const tasks = await response.json();
 
