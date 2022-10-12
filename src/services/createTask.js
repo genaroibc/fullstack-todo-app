@@ -1,5 +1,5 @@
 export const createTask = taskData => {
-  return fetch(process.env.NEXT_PUBLIC_TASKS_API_URL, {
+  return fetch(process.env.VERCEL_URL, {
     method: "POST",
     body: JSON.stringify(taskData),
     headers: {

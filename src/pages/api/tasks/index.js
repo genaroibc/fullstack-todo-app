@@ -2,7 +2,7 @@ import { createOneTask, getAllTasks } from "controllers/taskController";
 
 import { mongoDBConnection } from "services/mongoDBConnection";
 
-mongoDBConnection(process.env.TODO_DB_URL);
+mongoDBConnection(process.env.MONGODB_URI);
 
 export default async function handler(req, res) {
   const { method, body } = req;
