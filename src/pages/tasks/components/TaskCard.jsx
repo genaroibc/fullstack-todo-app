@@ -1,35 +1,30 @@
 import Link from "next/link";
-import styled from "styled-components";
-
-const STCard = styled.article`
-  position: relative;
-
-  padding: 1rem;
-  border-bottom: 10px solid lightseagreen;
-
-  background-color: darkslategrey;
-  border-radius: 10px;
-`;
-
-const STButton = styled.button`
-  margin: 0.4rem;
-
-  background-color: ${({ bgCol }) => bgCol || "initial"};
-
-  color: #fff;
-`;
+import { Button, Card, Container } from "semantic-ui-react";
 
 export function TaskCard({ title, description, _id, handleDelete }) {
   return (
-    <STCard>
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <STButton onClick={handleDelete} bgCol="#c80000">
-        DELETE
-      </STButton>
-      <Link href={`/tasks/${_id}`}>
-        <STButton bgCol="#004fe2">EDIT</STButton>
-      </Link>
-    </STCard>
+    <>
+      <Card
+        fluid={true}
+        style={{ padding: "1rem", backgroundColor: "slateblue" }}
+      >
+        <Card.Header>
+          <h2 style={{ fontSize: "1.3rem", fontWeight: "bolder" }}>{title}</h2>
+        </Card.Header>
+
+        <Card.Description>
+          <p>{description}</p>
+        </Card.Description>
+
+        <Container style={{ padding: "1rem" }}>
+          <Button color={"youtube"} onClick={handleDelete} bgCol="#c80000">
+            DELETE
+          </Button>
+          <Link href={`/tasks/${_id}`}>
+            <Button color={"twitter"}>EDIT</Button>
+          </Link>
+        </Container>
+      </Card>
+    </>
   );
 }

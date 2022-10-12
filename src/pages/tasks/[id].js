@@ -38,8 +38,7 @@ export default function UpdateTaskPage({ task = {} }) {
         inputNames={inputNames}
         inputValues={inputValues}
       />
-      <h2>{task.title}</h2>
-      <p>{task.description}</p>
+
       {taskStatus && <h3>{taskStatus}</h3>}
     </article>
   );

@@ -1,55 +1,52 @@
-import styled from "styled-components";
-
-const STForm = styled.form`
-  margin: 1rem auto;
-  background-color: steelblue;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-const STTextArea = styled.textarea`
-  padding: 1rem;
-
-  background-color: #898989;
-  margin-bottom: 1rem;
-  color: #fff;
-
-  resize: none;
-`;
-
-const STInput = styled.input`
-  padding: 0.4rem 1rem;
-
-  background-color: #898989;
-  margin-bottom: 1rem;
-  color: #fff;
-`;
+import {
+  Form,
+  Input,
+  Button,
+  TextArea,
+  Label,
+  Container,
+} from "semantic-ui-react";
 
 export function TaskForm({ handleSubmit, inputNames = {}, inputValues = {} }) {
   return (
-    <STForm onSubmit={handleSubmit}>
-      <label htmlFor={inputNames.title}>Title</label>
-      <STInput
-        minLength={6}
-        type="text"
-        name={inputNames.title}
-        id={inputNames.title}
-        required={true}
-        defaultValue={inputValues.title}
-      />
+    <Container textAlign="center">
+      <Form
+        style={{ width: "80%", margin: "auto", fontSize: "1.5rem" }}
+        onSubmit={handleSubmit}
+      >
+        <Label htmlFor={inputNames.title}>Title</Label>
 
-      <label htmlFor={inputNames.description}>Description (optional)</label>
-      <STTextArea
-        rows={10}
-        type="text"
-        name={inputNames.description}
-        id={inputNames.description}
-        defaultValue={inputValues.description}
-      />
-      <button type="submit">Create task</button>
-    </STForm>
+        <br />
+
+        <Input
+          style={{ width: "50%", margin: "1rem auto" }}
+          minLength={6}
+          type="text"
+          name={inputNames.title}
+          id={inputNames.title}
+          required={true}
+          defaultValue={inputValues.title}
+        />
+
+        <br />
+        <br />
+
+        <Label htmlFor={inputNames.description}>Description (optional)</Label>
+
+        <br />
+
+        <TextArea
+          style={{ width: "100%", margin: "1rem auto" }}
+          rows={10}
+          type="text"
+          name={inputNames.description}
+          id={inputNames.description}
+          defaultValue={inputValues.description}
+        />
+        <Button color={"green"} type="submit">
+          Create task
+        </Button>
+      </Form>
+    </Container>
   );
 }

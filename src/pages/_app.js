@@ -6,6 +6,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <NavBar />
+      <h1>Tasks App with MongoDB, Mongoose and Next!</h1>
 
       <Component {...pageProps} />
     </>
