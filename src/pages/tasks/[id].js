@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { updateTask } from "services/updateTask";
-import { TaskForm } from "./components/TaskForm";
+import { TaskForm } from "components/TaskForm";
 
 const TASK_DESCRIPTION_NAME = "task-description";
 const TASK_TITLE_NAME = "task-title";

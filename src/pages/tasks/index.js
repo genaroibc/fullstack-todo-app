@@ -1,5 +1,5 @@
 import { deleteTask } from "services/deleteTask";
-import { TasksList } from "./components/TasksList";
+import { TasksList } from "components/TasksList";
 import { Modal, Button } from "semantic-ui-react";
 import { useState } from "react";
 
