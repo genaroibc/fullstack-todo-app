@@ -5,14 +5,12 @@ import { TaskForm } from "components/TaskForm";
 const TASK_DESCRIPTION_NAME = "task-description";
 const TASK_TITLE_NAME = "task-title";
 
-const inputNames = {
+const INPUT_NAMES = {
   description: TASK_DESCRIPTION_NAME,
   title: TASK_TITLE_NAME,
 };
 
 export default function UpdateTaskPage({ task = {} }) {
-  const [taskStatus, setTaskStatus] = useState("");
-
   const inputValues = {
     description: task.description,
     title: task.title,
@@ -27,19 +25,17 @@ export default function UpdateTaskPage({ task = {} }) {
     const response = await updateTask(task._id, { title, description });
 
     if (!response.ok) return console.error(response);
-
-    setTaskStatus("Task updated successfully");
   };
 
   return (
     <article>
       <TaskForm
+        submitButtonText="Update Task"
         handleSubmit={handleSubmit}
-        inputNames={inputNames}
+        inputNames={INPUT_NAMES}
         inputValues={inputValues}
+        redirectTo="/tasks"
       />
-
-      {taskStatus && <h3>{taskStatus}</h3>}
     </article>
   );
 }

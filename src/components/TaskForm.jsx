@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   Form,
   Input,
@@ -7,12 +8,22 @@ import {
   Container,
 } from "semantic-ui-react";
 
-export function TaskForm({ handleSubmit, inputNames = {}, inputValues = {} }) {
+export function TaskForm({
+  handleSubmit,
+  inputNames = {},
+  inputValues = {},
+  submitButtonText = "Submit",
+  redirectTo = "",
+}) {
+  const { push } = useRouter();
   return (
     <Container textAlign="center">
       <Form
         style={{ width: "80%", margin: "auto", fontSize: "1.5rem" }}
-        onSubmit={handleSubmit}
+        onSubmit={async e => {
+          await handleSubmit(e);
+          redirectTo && push(redirectTo);
+        }}
       >
         <Label htmlFor={inputNames.title}>Title</Label>
 
@@ -44,7 +55,7 @@ export function TaskForm({ handleSubmit, inputNames = {}, inputValues = {} }) {
           defaultValue={inputValues.description}
         />
         <Button color={"green"} type="submit">
-          Create task
+          {submitButtonText}
         </Button>
       </Form>
     </Container>
