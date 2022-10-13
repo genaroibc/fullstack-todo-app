@@ -9,15 +9,23 @@ export function TaskCard({ title, description, _id, handleDelete }) {
         style={{ padding: "1rem", backgroundColor: "slateblue" }}
       >
         <Card.Header>
-          <h2 style={{ fontSize: "1.3rem", fontWeight: "bolder" }}>{title}</h2>
+          <h2
+            style={{
+              fontSize: "2rem",
+              fontWeight: "bolder",
+              margin: "1rem auto",
+            }}
+          >
+            {title}
+          </h2>
         </Card.Header>
 
         <Card.Description>
-          <p>{description}</p>
+          <p style={{ fontSize: "1.4rem" }}>{description}</p>
         </Card.Description>
 
         <Container style={{ padding: "1rem" }}>
-          <Button color={"youtube"} onClick={handleDelete} bgCol="#c80000">
+          <Button color={"youtube"} onClick={handleDelete}>
             DELETE
           </Button>
           <Link href={`/tasks/${_id}`}>

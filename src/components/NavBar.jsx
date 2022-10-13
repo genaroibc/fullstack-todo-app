@@ -1,26 +1,26 @@
 import Link from "next/link";
-import styled from "styled-components";
-
-const STNav = styled.nav`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  position: sticky;
-  top: 0;
-
-  width: 100%;
-  padding: 1rem;
-
-  background-color: steelblue;
-`;
+import { Header } from "semantic-ui-react";
 
 export default function NavBar() {
   return (
-    <STNav>
-      <Link href="/">Home</Link>
-      <Link href="/tasks">Tasks</Link>
-      <Link href="/tasks/create">Create Task</Link>
-    </STNav>
+    <Header
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+      attached={"bottom"}
+      inverted={true}
+      size={"huge"}
+    >
+      <Link style={{ margin: "1rem " }} href="/">
+        Home
+      </Link>
+      <Link style={{ margin: "1rem " }} href="/tasks">
+        Tasks
+      </Link>
+      <Link style={{ margin: "1rem " }} href="/tasks/create">
+        Create Task
+      </Link>
+    </Header>
   );
 }

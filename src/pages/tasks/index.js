@@ -30,11 +30,16 @@ export default function TasksPage({ tasks = [] }) {
         }}
       />
 
-      <Modal open={modalIsOpen}>
-        <Modal.Content>
-          <Modal.Description>
-            Are you sure you want to delete this task? This action is
-            permanent!!
+      <Modal style={{ textAlign: "center" }} open={modalIsOpen}>
+        <Modal.Content scrolling={true} style={{ backgroundColor: "#343434" }}>
+          <Modal.Description
+            style={{
+              fontSize: "1.8rem",
+              fontWeight: "bold",
+              margin: "1rem auto 2rem",
+            }}
+          >
+            Are you sure you want to delete this task? This action is permanent!
           </Modal.Description>
           <Modal.Actions>
             <Button color={"facebook"} onClick={closeModal}>
