@@ -1,7 +1,7 @@
 import { deleteTask } from "services/deleteTask";
 import { TasksList } from "components/TasksList";
-import { Modal, Button } from "semantic-ui-react";
 import { useState } from "react";
+import { CustomModal } from "components/CustomModal";
 
 export default function TasksPage({ tasks = [] }) {
   console.log("url:", process.env.NEXT_PUBLIC_TASKS_API_URL);
@@ -30,31 +30,16 @@ export default function TasksPage({ tasks = [] }) {
         }}
       />
 
-      <Modal style={{ textAlign: "center" }} open={modalIsOpen}>
-        <Modal.Content scrolling={true} style={{ backgroundColor: "#343434" }}>
-          <Modal.Description
-            style={{
-              fontSize: "1.8rem",
-              fontWeight: "bold",
-              margin: "1rem auto 2rem",
-            }}
-          >
-            Are you sure you want to delete this task? This action is permanent!
-          </Modal.Description>
-          <Modal.Actions>
-            <Button color={"facebook"} onClick={closeModal}>
-              Cancel
-            </Button>
-
-            <Button
-              color={"youtube"}
-              onClick={() => handleDelete(taskIdToDelete)}
-            >
-              Delete
-            </Button>
-          </Modal.Actions>
-        </Modal.Content>
-      </Modal>
+      <CustomModal
+        description={
+          "Are you sure you want to delete this task? This action is permanent!"
+        }
+        open={modalIsOpen}
+        onNegativeAction={closeModal}
+        onPositiveAction={() => handleDelete(taskIdToDelete)}
+        negativeText={"cancel"}
+        positiveText={"delete"}
+      />
 
       {tasks.lenght && <h3>No tasks yet...</h3>}
     </main>
