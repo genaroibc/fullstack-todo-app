@@ -4,7 +4,10 @@ import { useState } from "react";
 import { CustomModal } from "components/CustomModal";
 
 export default function TasksPage({ tasks = [] }) {
-  console.log("url:", process.env.NEXT_PUBLIC_TASKS_API_URL);
+  console.log(
+    "url:",
+    `${process.env.VERCEL_URL}${process.env.NEXT_PUBLIC_TASKS_API_ENDPOINT}`
+  );
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [taskIdToDelete, setTaskIdToDelete] = useState(null);
 
@@ -47,7 +50,9 @@ export default function TasksPage({ tasks = [] }) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch(process.env.NEXT_PUBLIC_TASKS_API_URL);
+  const response = await fetch(
+    `${process.env.VERCEL_URL}${process.env.NEXT_PUBLIC_TASKS_API_ENDPOINT}`
+  );
   const tasks = await response.json();
 
   return {
