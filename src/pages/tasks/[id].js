@@ -41,10 +41,9 @@ export default function UpdateTaskPage({ task = {} }) {
 }
 
 export async function getServerSideProps({ query: { id } }) {
-  const response = await fetch(
-    `${process.env.VERCEL_URL}${process.env.NEXT_PUBLIC_TASKS_API_ENDPOINT}/${id}`
-  );
+  const URL = `${process.env.NEXT_PUBLIC_TASKS_API_URL}/${id}`;
 
+  const response = await fetch(URL);
   const task = await response.json();
 
   return {
