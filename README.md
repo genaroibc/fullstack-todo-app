@@ -1,34 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fullstack To-Do App
 
-## Getting Started
+## 📑 Description
 
-First, run the development server:
+A Fullstack To-Do application, using [MongoDB](https://mongodb.com/) and [Next.js](https://nextjs.org/), that is, both server and client side.
 
-```bash
-npm run dev
-# or
-yarn dev
+## 📜 Pre-requisites
+
+You need to have both [Git](https://git-scm.com/), [Node](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/try/download/community) installed.
+
+Also, you need to have MongoDB running:
+
+For Windows:
+
+```shell
+   cd C:\data
+   mkdir db
+   C:\mongodb\bin\mongod.exe
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For Linux/Mac OS:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```shell
+  sudo service mongodb start
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## ▶️ Getting Started
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+You can both [visit the web site](https://fullstack-todo-app-ten.vercel.app/) to see the app running, or follow the steps below to clone the repository and start modifying it.
 
-## Learn More
+First, clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+```shell
+  git clone https://github.com/GenaroIBC/fullstack-todo-app.git
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Then, change to the project's directory and install dependencies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```shell
+  cd fullstack-todo-app && npm install
+```
 
-## Deploy on Vercel
+Finally, start the development server:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```shell
+   npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+🌐 Now, you can go to [localhost:3000](http://localhost:3000) with your browser to start using and modifying the app.
+
+## 🚀 Stack of Technologies
+
+Main:
+
+1. [Next.js](https://nextjs.org)
+1. [MongoDB](https://www.mongodb.com)
+1. [Mongoose](https://mongoosejs.com)
+
+Styles:
+
+1. [Styled Components](https://styled-components.com)
+1. [Semantic UI](https://semantic-ui.com)
+
+Deploy: [Vercel](https://vercel.com)
