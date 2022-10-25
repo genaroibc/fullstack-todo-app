@@ -8,6 +8,8 @@ import {
   Container,
 } from "semantic-ui-react";
 
+const INPUT_STYLES = { width: "100%", margin: "1rem auto" };
+
 export function TaskForm({
   handleSubmit,
   inputNames = {},
@@ -30,7 +32,7 @@ export function TaskForm({
         <br />
 
         <Input
-          style={{ width: "50%", margin: "1rem auto" }}
+          style={INPUT_STYLES}
           minLength={6}
           type="text"
           name={inputNames.title}
@@ -47,7 +49,7 @@ export function TaskForm({
         <br />
 
         <TextArea
-          style={{ width: "100%", margin: "1rem auto" }}
+          style={INPUT_STYLES}
           rows={10}
           type="text"
           name={inputNames.description}
