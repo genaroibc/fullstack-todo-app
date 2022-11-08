@@ -1,4 +1,6 @@
 import { LoginForm } from "components/LoginForm";
+import { useAuthContext } from "context/AuthContext";
+import { useRouter } from "next/router";
 
 const NAME_INPUT_NAME = "user-name";
 const PASSWORD_INPUT_NAME = "user-password";
@@ -16,19 +18,24 @@ const INPUTS_CONFIG = [
   }
 ];
 export default function Login() {
+  const { setAuth } = useAuthContext();
   const handleSubmit = async e => {
     e.preventDefault();
 
     const username = e.target[NAME_INPUT_NAME].value;
     const password = e.target[PASSWORD_INPUT_NAME].value;
 
-    fetch("/api/login", {
+    const response = await fetch("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({
         username,
         password
       })
-    }).then(console.log);
+    });
+    const data = await response.json();
+
+    console.log({ data });
+    setAuth({ isAuth: true, username: data.username });
   };
   return (
     <>
