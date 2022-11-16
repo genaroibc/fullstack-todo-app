@@ -6,7 +6,8 @@ export function mongoDBConnection(uri = "") {
   if (!isConnected && uri) {
     mongoose
       .connect(uri)
-      .then(() => console.log(`MongoDB connected in ${uri}!!`));
+      .then(() => console.log(`MongoDB connected in ${uri}!!`))
+      .catch(console.error);
     isConnected = true;
   }
 }

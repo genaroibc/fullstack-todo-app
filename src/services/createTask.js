@@ -5,7 +5,7 @@ export const createTask = taskData => {
     method: "POST",
     body: JSON.stringify(taskData),
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
-    },
+      "Content-Type": "application/json; charset=utf-8"
+    }
   });
 };
