@@ -28,6 +28,9 @@ export default function NavBar() {
       <Link style={{ margin: "1rem " }} href="/login">
         Login
       </Link>
+      <Link style={{ margin: "1rem " }} href="/sign-up">
+        Sign Up
+      </Link>
       <Link style={{ margin: "1rem " }} href="/tasks">
         Tasks
       </Link>
