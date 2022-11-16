@@ -1,44 +1,49 @@
-import jwt from "jsonwebtoken";
-import cookie from "cookie";
+import { getOneUserByUserName } from "controllers/userController";
+import { mongoDBConnection } from "services/mongoDBConnection";
+import { serializeToken } from "utils/serializeToken";
 
-export default function handler(req, res) {
+mongoDBConnection(process.env.MONGODB_URI);
+
+export default async function handler(req, res) {
   const { body, method } = req;
   const { username, password } = JSON.parse(body);
 
+  if (!username || !password) {
+    return res.status(400).json({
+      error: true,
+      error_message: "Invalid username or password"
+    });
+  }
+
   switch (method) {
     case "POST":
-      if (username !== "admin@admin" || password !== "admin123") {
-        return res.status(403).json({
+      const user = await getOneUserByUserName(username);
+
+      if (!user.username) {
+        // search correct status to error creating resource
+        return res.status(404).json({
           error: true,
-          error_message: "Invalid username or password"
+          error_message: "Incorrect username or password"
         });
       }
 
-      const token = jwt.sign(
-        {
-          username,
-          password,
-          exp: (Date.now() / 1000) * 60 * 60 * 24 * 30
-        },
-        "secret"
-      );
-
-      const serializedToken = cookie.serialize("userAuthToken", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV !== "production",
-        sameSite: "strict",
-        maxAge: (Date.now() / 1000) * 60 * 60 * 24 * 30,
-        path: "/"
+      const serializedAuthToken = serializeToken({
+        data: { username: user.username, password, userId: user._id },
+        cookieName: "userAuthToken"
       });
 
-      res.setHeader("Set-Cookie", serializedToken);
+      res.setHeader("Set-Cookie", serializedAuthToken);
 
-      return res.json({ username });
+      return res.status(200).json({
+        username: user.username,
+        userId: user._id,
+        message: "User logged in successfully"
+      });
 
     default:
       return res.status(400).json({
         error: true,
-        error_message: "Invalid method"
+        error_message: "Invalid method on this endpoint"
       });
   }
 }
