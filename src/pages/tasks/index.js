@@ -2,10 +2,10 @@ import { deleteTask } from "services/deleteTask";
 import { TasksList } from "components/TasksList";
 import { useState } from "react";
 import { CustomModal } from "components/CustomModal";
+import { Button } from "semantic-ui-react";
+import Link from "next/link";
 
 export default function TasksPage({ tasks = [] }) {
-  console.log("url:", process.env.NEXT_PUBLIC_TASKS_API_URL);
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [taskIdToDelete, setTaskIdToDelete] = useState(null);
 
@@ -21,6 +21,19 @@ export default function TasksPage({ tasks = [] }) {
 
   return (
     <main>
+      <nav
+        style={{
+          position: "absolute",
+          right: "2vw",
+          padding: "1rem",
+          margin: "1rem",
+          backgroundColor: "steelblue",
+          maxWidth: "500px",
+          minWidth: "100px"
+        }}
+      >
+        <Link href="/tasks/create">New Task</Link>
+      </nav>
       <h1>Tasks list:</h1>
 
       <TasksList
@@ -47,15 +60,19 @@ export default function TasksPage({ tasks = [] }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req }) {
   const URL = process.env.NEXT_PUBLIC_TASKS_API_URL;
+  const response = await fetch(URL, {
+    headers: {
+      Cookie: req.headers.cookie
+    }
+  });
 
-  const response = await fetch(URL);
   const tasks = await response.json();
 
   return {
     props: {
-      tasks,
-    },
+      tasks: tasks.error ? [] : tasks
+    }
   };
 }
