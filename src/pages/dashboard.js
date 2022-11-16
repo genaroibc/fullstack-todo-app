@@ -16,9 +16,7 @@ export default function Dashboard() {
 
   const handleLogout = async () => {
     const response = await fetch("/api/auth/logout", { method: "POST" });
-    const json = response.json();
-
-    console.log({ json });
+    const json = await response.json();
 
     setAuth({ isAuth: false, username: "" });
     router.push("/login");
