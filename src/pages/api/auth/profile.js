@@ -1,17 +1,20 @@
 import jwt from "jsonwebtoken";
+import { mongoDBConnection } from "services/mongoDBConnection";
+
+mongoDBConnection(process.env.MONGODB_URI);
 
 export default function handler(req, res) {
   const { method, cookies } = req;
   const { userAuthToken } = cookies;
 
+  if (!userAuthToken) {
+    return res
+      .status(401)
+      .json({ error: true, error_message: "Invalid authentication token" });
+  }
+
   switch (method) {
     case "GET":
-      if (!userAuthToken) {
-        return res
-          .status(401)
-          .json({ error: true, error_message: "Invalid user authentication" });
-      }
-
       try {
         const { username } = jwt.verify(userAuthToken, "secret");
 
@@ -22,14 +25,10 @@ export default function handler(req, res) {
           error_message: "Invalid username and/or password"
         });
       }
-
-    case "POST":
-      return;
-    case "PUT":
-      return;
-    case "DELETE":
-      return;
     default:
-      return;
+      return res.status(405).json({
+        error: true,
+        error_message: "Invalid method on this resource"
+      });
   }
 }

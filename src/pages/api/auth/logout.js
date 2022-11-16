@@ -1,5 +1,8 @@
 import jwt from "jsonwebtoken";
 import cookie from "cookie";
+import { mongoDBConnection } from "services/mongoDBConnection";
+
+mongoDBConnection(process.env.MONGODB_URI);
 
 export default function handler(req, res) {
   const { method, cookies } = req;
@@ -16,21 +19,26 @@ export default function handler(req, res) {
 
       jwt.verify(userAuthToken, "secret");
 
-      const serializedExpiredToken = cookie.serialize("userAuthToken", null, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV !== "production",
-        sameSite: "strict",
-        maxAge: 0,
-        path: "/"
-      });
+      const serializedAuthExpiredToken = cookie.serialize(
+        "userAuthToken",
+        null,
+        {
+          httpOnly: true,
+          secure: process.env.NODE_ENV !== "production",
+          sameSite: "strict",
+          maxAge: 0,
+          path: "/"
+        }
+      );
 
-      res.setHeader("Set-Cookie", serializedExpiredToken);
+      res.setHeader("Set-Cookie", serializedAuthExpiredToken);
 
       return res.status(200).json("logout succesfully");
 
     default:
-      return res
-        .status(200)
-        .json({ error: true, error_message: "Invalid method" });
+      return res.status(405).json({
+        error: true,
+        error_message: "Invalid method on this resource"
+      });
   }
 }
