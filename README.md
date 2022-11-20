@@ -2,9 +2,13 @@
 
 ## 📑 Description
 
-A Fullstack To-Do application, using [MongoDB](https://mongodb.com/) and [Next.js](https://nextjs.org/), that is, both server and client side.
+A Fullstack To-Do application, using [MongoDB](https://mongodb.com/) and [Next.js](https://nextjs.org/), that is, both server and client sides.
 
-## 📜 Pre-requisites
+## ▶️ Getting Started
+
+You can both [visit the web site](https://fullstack-todo-app-ten.vercel.app/) to see the app running, or follow the steps below to clone the repository and start modifying it.
+
+### 📜 Pre-requisites
 
 You need to have both [Git](https://git-scm.com/), [Node](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/try/download/community) installed.
 
@@ -23,10 +27,6 @@ For Linux/Mac OS:
 ```shell
   sudo service mongodb start
 ```
-
-## ▶️ Getting Started
-
-You can both [visit the web site](https://fullstack-todo-app-ten.vercel.app/) to see the app running, or follow the steps below to clone the repository and start modifying it.
 
 First, clone the repository:
 
@@ -61,4 +61,4 @@ Styles:
 1. [Styled Components](https://styled-components.com)
 1. [Semantic UI](https://semantic-ui.com)
 
-Deploy: [Vercel](https://vercel.com)
+Deployment: [Vercel](https://vercel.com)
