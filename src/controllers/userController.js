@@ -1,4 +1,5 @@
 import { UserModel } from "models/UserModel";
+import { Types } from "mongoose";
 
 export async function getOneUserById(id) {
   try {
@@ -59,7 +60,7 @@ export async function createTaskByUserId({
   try {
     const user = await UserModel.findById(userId);
 
-    user.tasks.push({ title, description });
+    user.tasks.push({ title, description, _id: new Types.ObjectId() });
 
     const savedUser = await user.save();
 
