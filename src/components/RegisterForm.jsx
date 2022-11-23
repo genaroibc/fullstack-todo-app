@@ -11,12 +11,21 @@ const INPUTS_CONFIG = [
   {
     type: "text",
     name: NAME_INPUT_NAME,
-    placeholder: "Enter your username"
+    placeholder: "Enter your username",
+    minLength: 3,
+    maxLength: 16,
+    required: true
   },
   {
     type: "password",
     name: PASSWORD_INPUT_NAME,
-    placeholder: "Enter your password"
+    placeholder: "Enter your password",
+    minLength: 8,
+    maxLength: 16,
+    required: true,
+    pattern: "[\\w0-9]+",
+    title:
+      "This field must be at least 8 characters long, and contain only letters and numbers"
   }
 ];
 
