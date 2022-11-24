@@ -1,8 +1,8 @@
 import { TaskModel } from "models/TasksModel";
 
-export async function getAllTasks() {
+export async function getAllTasks({ userId }) {
   try {
-    const tasks = await TaskModel.find();
+    const tasks = await TaskModel.findById({ userId });
     return tasks || [];
   } catch (error) {
     return error;
