@@ -70,3 +70,24 @@ export async function createTaskByUserId({
     return error;
   }
 }
+
+export async function deleteOneTaskByIds({ userId, taskId }) {
+  try {
+    const user = await UserModel.findById(userId);
+
+    const filteredTasks = user.tasks.filter(
+      task => task._id.toString() !== taskId
+    );
+
+    user.set("tasks", filteredTasks);
+
+    await user.save();
+
+    return {
+      deleted: filteredTasks.length === user.tasks.length
+    };
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}

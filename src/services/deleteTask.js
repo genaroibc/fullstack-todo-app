@@ -1,5 +1,7 @@
-export const deleteTask = task_id => {
-  const URL = `${process.env.NEXT_PUBLIC_TASKS_API_URL}/${task_id}`;
+export const deleteTask = taskId => {
+  const URL = `${process.env.NEXT_PUBLIC_TASKS_API_URL}/${taskId}`;
 
-  return fetch(URL, { method: "DELETE" });
+  return fetch(URL, {
+    method: "DELETE"
+  });
 };

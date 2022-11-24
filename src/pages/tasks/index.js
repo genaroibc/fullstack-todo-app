@@ -2,7 +2,6 @@ import { deleteTask } from "services/deleteTask";
 import { TasksList } from "components/TasksList";
 import { useState } from "react";
 import { CustomModal } from "components/CustomModal";
-import { Button } from "semantic-ui-react";
 import Link from "next/link";
 
 export default function TasksPage({ tasks = [] }) {
@@ -12,8 +11,9 @@ export default function TasksPage({ tasks = [] }) {
   const closeModal = () => setModalIsOpen(false);
   const openModal = () => setModalIsOpen(true);
 
-  const handleDelete = async task_id => {
-    const response = await deleteTask(task_id);
+  const handleDelete = async taskId => {
+    const response = await deleteTask(taskId);
+
     if (!response.ok) console.error(response);
 
     closeModal();
