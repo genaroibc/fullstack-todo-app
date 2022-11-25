@@ -51,7 +51,7 @@ export default async function handler(req, res) {
         .json({ ok: true, message: "Task updated successfully" });
 
     case "DELETE":
-      const { deleted } = await deleteOneTaskByIds({
+      const { deleted, tasks } = await deleteOneTaskByIds({
         taskId: query.id,
         userId
       });
@@ -63,9 +63,11 @@ export default async function handler(req, res) {
         });
       }
 
-      return res
-        .status(204)
-        .json({ ok: true, message: "Task deleted successfully" });
+      return res.status(200).json({
+        ok: true,
+        message: "Task deleted successfully",
+        tasks
+      });
 
     default:
       return res.status(400).json({

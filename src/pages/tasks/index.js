@@ -4,18 +4,21 @@ import { useState } from "react";
 import { CustomModal } from "components/CustomModal";
 import Link from "next/link";
 
-export default function TasksPage({ tasks = [] }) {
+export default function TasksPage({ propTasks = [] }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [taskIdToDelete, setTaskIdToDelete] = useState(null);
+  const [tasks, setTasks] = useState(propTasks);
 
   const closeModal = () => setModalIsOpen(false);
   const openModal = () => setModalIsOpen(true);
 
   const handleDelete = async taskId => {
     const response = await deleteTask(taskId);
+    const { tasks } = await response.json();
 
-    if (!response.ok) console.error(response);
+    if (!response.ok) return console.error(response);
 
+    setTasks(tasks);
     closeModal();
   };
 
@@ -72,7 +75,7 @@ export async function getServerSideProps({ req }) {
 
   return {
     props: {
-      tasks: tasks.error ? [] : tasks
+      propTasks: tasks.error ? [] : tasks
     }
   };
 }

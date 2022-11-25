@@ -84,7 +84,8 @@ export async function deleteOneTaskByIds({ userId, taskId }) {
     await user.save();
 
     return {
-      deleted: filteredTasks.length === user.tasks.length
+      deleted: filteredTasks.length === user.tasks.length,
+      tasks: user.tasks
     };
   } catch (error) {
     console.error(error);
