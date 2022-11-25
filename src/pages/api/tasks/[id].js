@@ -1,10 +1,10 @@
 import {
-  deleteOneTaskById,
-  getOneTaskById,
-  updateOneTaskById
-} from "controllers/taskController";
-import { deleteOneTaskByIds } from "controllers/userController";
+  deleteOneTaskByIds,
+  getOneTaskByIds,
+  updateOneTaskByIds
+} from "controllers/userController";
 import jwt from "jsonwebtoken";
+import { isEmpty } from "utils/isEmpty";
 
 export default async function handler(req, res) {
   const { method, body, query, cookies } = req;
@@ -21,14 +21,34 @@ export default async function handler(req, res) {
 
   switch (method) {
     case "GET":
-      const task = await getOneTaskById(query.id);
+      const task = await getOneTaskByIds({ userId, taskId: query.id });
+
+      if (isEmpty(task)) {
+        return res.status(404).json({
+          error: true,
+          error_mesage: `Task with id ${query.id} not found.`
+        });
+      }
 
       return res.status(200).json(task);
 
     case "PUT":
-      const updatedTask = await updateOneTaskById(query.id, body);
+      const { updated } = await updateOneTaskByIds({
+        userId,
+        taskId: query.id,
+        taskData: body
+      });
+      console.log({ updated });
+      if (!updated) {
+        return res.status(500).json({
+          error: true,
+          error_message: `Task with id ${query.id} was not updated.`
+        });
+      }
 
-      return res.status(200).json(updatedTask);
+      return res
+        .status(201)
+        .json({ ok: true, message: "Task updated successfully" });
 
     case "DELETE":
       const { deleted } = await deleteOneTaskByIds({

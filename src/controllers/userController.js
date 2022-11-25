@@ -20,7 +20,7 @@ export async function getOneUserByUserName(username) {
   }
 }
 
-export async function getTasksByUserId(userId) {
+export async function getAllTasksByUserId(userId) {
   try {
     const user = (await UserModel.findById(userId)) ?? {};
 
@@ -85,6 +85,42 @@ export async function deleteOneTaskByIds({ userId, taskId }) {
 
     return {
       deleted: filteredTasks.length === user.tasks.length
+    };
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+export async function getOneTaskByIds({ userId, taskId }) {
+  try {
+    const user = await UserModel.findById(userId);
+
+    const task = user.tasks.find(task => task._id?.toString() === taskId);
+
+    return task ?? {};
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+export async function updateOneTaskByIds({ userId, taskId, taskData }) {
+  try {
+    const user = await UserModel.findById(userId);
+
+    const updatedTasks = user.tasks.map(task => {
+      return task._id.toString() !== taskId
+        ? task
+        : { _id: task._id, ...taskData };
+    });
+
+    user.set("tasks", updatedTasks);
+
+    await user.save();
+
+    return {
+      updated: updatedTasks.length === user.tasks.length
     };
   } catch (error) {
     console.error(error);

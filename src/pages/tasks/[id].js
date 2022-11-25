@@ -7,13 +7,13 @@ const TASK_TITLE_NAME = "task-title";
 
 const INPUT_NAMES = {
   description: TASK_DESCRIPTION_NAME,
-  title: TASK_TITLE_NAME,
+  title: TASK_TITLE_NAME
 };
 
 export default function UpdateTaskPage({ task = {} }) {
   const inputValues = {
     description: task.description,
-    title: task.title,
+    title: task.title
   };
 
   const handleSubmit = async e => {
@@ -40,15 +40,20 @@ export default function UpdateTaskPage({ task = {} }) {
   );
 }
 
-export async function getServerSideProps({ query: { id } }) {
+export async function getServerSideProps({ query: { id }, req }) {
   const URL = `${process.env.NEXT_PUBLIC_TASKS_API_URL}/${id}`;
 
-  const response = await fetch(URL);
+  const response = await fetch(URL, {
+    headers: {
+      cookie: req.headers.cookie
+    }
+  });
+
   const task = await response.json();
 
   return {
     props: {
-      task,
-    },
+      task
+    }
   };
 }
