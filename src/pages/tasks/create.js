@@ -6,7 +6,7 @@ const TASK_TITLE_NAME = "task-title";
 
 const INPUT_NAMES = {
   description: TASK_DESCRIPTION_NAME,
-  title: TASK_TITLE_NAME,
+  title: TASK_TITLE_NAME
 };
 
 export default function CreatePage() {
@@ -17,7 +17,7 @@ export default function CreatePage() {
     const description = e.target[TASK_DESCRIPTION_NAME].value;
 
     try {
-      const response = await createTask({ title, description });
+      const response = await createTask({ taskData: { title, description } });
 
       if (!response.ok) throw new Error(response);
     } catch (error) {

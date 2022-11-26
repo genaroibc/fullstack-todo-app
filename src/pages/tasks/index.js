@@ -3,6 +3,7 @@ import { TasksList } from "components/TasksList";
 import { useState } from "react";
 import { CustomModal } from "components/CustomModal";
 import Link from "next/link";
+import { getAllTasks } from "services/getAllTasks";
 
 export default function TasksPage({ propTasks = [] }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -58,19 +59,13 @@ export default function TasksPage({ propTasks = [] }) {
         positiveText={"delete"}
       />
 
-      {tasks.lenght && <h3>No tasks yet...</h3>}
+      {!tasks.length && <h3>No tasks yet...</h3>}
     </main>
   );
 }
 
 export async function getServerSideProps({ req }) {
-  const URL = process.env.NEXT_PUBLIC_TASKS_API_URL;
-  const response = await fetch(URL, {
-    headers: {
-      Cookie: req.headers.cookie
-    }
-  });
-
+  const response = await getAllTasks({ cookie: req.headers.cookie });
   const tasks = await response.json();
 
   return {

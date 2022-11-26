@@ -2,7 +2,7 @@ import { mongoDBConnection } from "services/mongoDBConnection";
 import jwt from "jsonwebtoken";
 import {
   createTaskByUserId,
-  getTasksByUserId
+  getAllTasksByUserId
 } from "controllers/userController";
 
 mongoDBConnection(process.env.MONGODB_URI);
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
   switch (method) {
     case "GET":
-      const tasks = await getTasksByUserId(userId);
+      const tasks = await getAllTasksByUserId(userId);
 
       return res.status(200).json(tasks);
 

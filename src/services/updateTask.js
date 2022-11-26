@@ -1,11 +1,11 @@
-export const updateTask = (task_id, task_data) => {
-  const URL = `${process.env.NEXT_PUBLIC_TASKS_API_URL}/${task_id}`;
+export const updateTask = ({ taskId, taskData }) => {
+  const URL = `${process.env.NEXT_PUBLIC_TASKS_API_URL}/${taskId}`;
 
   return fetch(URL, {
     method: "PUT",
-    body: JSON.stringify(task_data),
+    body: JSON.stringify(taskData),
     headers: {
-      "Content-Type": "application/json",
-    },
+      "Content-Type": "application/json"
+    }
   });
 };

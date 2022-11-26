@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { updateTask } from "services/updateTask";
 import { TaskForm } from "components/TaskForm";
+import { getOneTask } from "services/getOneTask";
 
 const TASK_DESCRIPTION_NAME = "task-description";
 const TASK_TITLE_NAME = "task-title";
@@ -22,7 +22,10 @@ export default function UpdateTaskPage({ task = {} }) {
     const title = e.target[TASK_TITLE_NAME].value;
     const description = e.target[TASK_DESCRIPTION_NAME].value;
 
-    const response = await updateTask(task._id, { title, description });
+    const response = await updateTask({
+      taskId: task._id,
+      taskData: { title, description }
+    });
 
     if (!response.ok) return console.error(response);
   };
@@ -40,13 +43,10 @@ export default function UpdateTaskPage({ task = {} }) {
   );
 }
 
-export async function getServerSideProps({ query: { id }, req }) {
-  const URL = `${process.env.NEXT_PUBLIC_TASKS_API_URL}/${id}`;
-
-  const response = await fetch(URL, {
-    headers: {
-      cookie: req.headers.cookie
-    }
+export async function getServerSideProps({ query, req }) {
+  const response = await getOneTask({
+    cookie: req.headers.cookie,
+    taskId: query.id
   });
 
   const task = await response.json();

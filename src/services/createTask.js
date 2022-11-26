@@ -1,5 +1,5 @@
-export const createTask = taskData => {
-  const URL = `${process.env.NEXT_PUBLIC_TASKS_API_URL}`;
+export const createTask = ({ taskData }) => {
+  const URL = process.env.NEXT_PUBLIC_TASKS_API_URL;
 
   return fetch(URL, {
     method: "POST",
