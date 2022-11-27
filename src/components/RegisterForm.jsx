@@ -2,6 +2,7 @@ import { LoginForm } from "components/LoginForm";
 import { useAuthContext } from "context/AuthContext";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { setLocalStorage } from "utils/localStorage";
 import { ErrorMessage } from "./ErrorMessage";
 
 const NAME_INPUT_NAME = "user-name";
@@ -60,7 +61,15 @@ export function RegisterForm({ type = "" }) {
       return setRequestError(data);
     }
 
-    setAuth({ isAuth: true, username: data.username });
+    const authData = {
+      isAuth: true,
+      username: data.username
+    };
+
+    setLocalStorage("authData", authData);
+
+    setAuth(authData);
+
     router.push("/tasks");
   };
 

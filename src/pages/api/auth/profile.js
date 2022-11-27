@@ -18,7 +18,7 @@ export default function handler(req, res) {
       try {
         const { username } = jwt.verify(userAuthToken, "secret");
 
-        return res.status(200).json({ username });
+        return res.status(200).json({ ok: true, profile: { username } });
       } catch (error) {
         return res.status(401).json({
           error: true,
