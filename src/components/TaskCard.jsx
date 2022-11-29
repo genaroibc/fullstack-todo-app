@@ -1,19 +1,47 @@
 import Link from "next/link";
 import { Button, Card, Container } from "semantic-ui-react";
 
-export function TaskCard({ title, description, _id, handleDelete }) {
+const priorityColors = {
+  low: "green",
+  medium: "blue",
+  high: "red"
+};
+
+export function TaskCard({
+  title,
+  description,
+  priority = "low",
+  _id,
+  handleDelete
+}) {
   return (
     <>
       <Card
         fluid={true}
-        style={{ padding: "1rem", backgroundColor: "slateblue" }}
+        style={{
+          padding: "1rem",
+          backgroundColor: "slateblue",
+          position: "relative"
+        }}
       >
+        <span
+          style={{
+            position: "absolute",
+            top: "1rem",
+            right: "1rem",
+            backgroundColor: priorityColors[priority],
+            padding: "1rem",
+            borderRadius: "10px !important"
+          }}
+        >
+          {priority}
+        </span>
         <Card.Header>
           <h2
             style={{
               fontSize: "2rem",
               fontWeight: "bolder",
-              margin: "1rem auto",
+              margin: "1rem auto"
             }}
           >
             {title}
