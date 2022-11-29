@@ -53,14 +53,14 @@ export async function createOneUser(userData) {
   }
 }
 
-export async function createTaskByUserId({
-  taskData: { title, description } = {},
-  userId = ""
-}) {
+export async function createTaskByUserId({ taskData = {}, userId = "" }) {
   try {
     const user = await UserModel.findById(userId);
 
-    user.tasks.push({ title, description, _id: new Types.ObjectId() });
+    user.tasks.push({
+      ...taskData,
+      _id: new Types.ObjectId()
+    });
 
     const savedUser = await user.save();
 
@@ -113,7 +113,7 @@ export async function updateOneTaskByIds({ userId, taskId, taskData }) {
     const updatedTasks = user.tasks.map(task => {
       return task._id.toString() !== taskId
         ? task
-        : { _id: task._id, ...taskData };
+        : { ...taskData, _id: task._id };
     });
 
     user.set("tasks", updatedTasks);
