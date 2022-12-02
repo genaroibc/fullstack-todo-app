@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CustomModal } from "components/CustomModal";
 import Link from "next/link";
 import { getAllTasks } from "services/getAllTasks";
+import { sortByPriority } from "utils/sortByPriority";
 
 export default function TasksPage({ propTasks = [] }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -19,7 +20,9 @@ export default function TasksPage({ propTasks = [] }) {
 
     if (!response.ok) return console.error(response);
 
-    setTasks(tasks);
+    const sortedTasks = sortByPriority({ items: tasks });
+
+    setTasks(sortedTasks);
     closeModal();
   };
 
@@ -70,7 +73,7 @@ export async function getServerSideProps({ req }) {
 
   return {
     props: {
-      propTasks: tasks.error ? [] : tasks
+      propTasks: tasks.error ? [] : sortByPriority({ items: tasks })
     }
   };
 }
