@@ -1,5 +1,4 @@
 import { useAuthContext } from "context/AuthContext";
-import { EDGE_UNSUPPORTED_NODE_APIS } from "next/dist/shared/lib/constants";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button, Header } from "semantic-ui-react";
@@ -7,16 +6,12 @@ import { v4 as uuid } from "uuid";
 
 const LINKS_CONFIG = [
   {
-    title: "Home",
+    title: "Tasks",
     href: "/"
   },
   {
-    title: "Tasks",
-    href: "/tasks"
-  },
-  {
     title: "Create Task",
-    href: "/tasks/create"
+    href: "/create"
   }
 ];
 

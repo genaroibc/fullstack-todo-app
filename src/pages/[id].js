@@ -41,7 +41,7 @@ export default function UpdateTaskPage({ task = {} }) {
         handleSubmit={handleSubmit}
         inputNames={INPUT_NAMES}
         inputValues={inputValues}
-        redirectTo="/tasks"
+        redirectTo="/"
       />
     </article>
   );

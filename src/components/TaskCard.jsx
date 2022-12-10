@@ -56,7 +56,7 @@ export function TaskCard({
           <Button color={"youtube"} onClick={handleDelete}>
             DELETE
           </Button>
-          <Link href={`/tasks/${_id}`}>
+          <Link href={`/${_id}`}>
             <Button color={"twitter"}>EDIT</Button>
           </Link>
         </Container>

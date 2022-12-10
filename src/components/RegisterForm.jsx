@@ -70,7 +70,7 @@ export function RegisterForm({ type = "" }) {
 
     setAuth(authData);
 
-    router.push("/tasks");
+    router.push("/");
   };
 
   return (

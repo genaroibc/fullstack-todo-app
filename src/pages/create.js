@@ -36,7 +36,7 @@ export default function CreatePage() {
         submitButtonText="Create Task"
         inputNames={INPUT_NAMES}
         handleSubmit={handleSubmit}
-        redirectTo="/tasks"
+        redirectTo="/"
       />
     </>
   );

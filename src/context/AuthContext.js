@@ -21,7 +21,7 @@ export const AuthContextProvider = ({ children }) => {
         if (!data.ok) throw data;
 
         setAuth({ isAuth: true, username: data.profile.username });
-        router.push("/tasks");
+        router.push("/");
       } catch (error) {
         console.error(error);
       }
