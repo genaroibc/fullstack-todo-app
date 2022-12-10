@@ -74,7 +74,9 @@ export function TaskForm({
         <Radio
           name={inputNames.priority}
           id={lowId}
-          defaultChecked={inputValues.priority === "low"}
+          defaultChecked={
+            inputValues.priority === "low" || !inputValues.priority
+          }
           value="low"
         />
 

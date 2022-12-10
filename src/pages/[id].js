@@ -16,7 +16,7 @@ export default function UpdateTaskPage({ task = {} }) {
   const inputValues = {
     description: task.description,
     title: task.title,
-    priority: task.priority
+    priority: task.priority || "low"
   };
 
   const handleSubmit = async e => {
