@@ -30,18 +30,16 @@ export default function HomePage({ propTasks = [] }) {
     <main>
       <nav
         style={{
-          position: "absolute",
-          right: "2vw",
-          padding: "1rem",
-          margin: "1rem",
+          borderRadius: "5px",
+          padding: "1rem 2rem",
+          margin: "1rem 1rem 1rem auto",
           backgroundColor: "steelblue",
-          maxWidth: "500px",
-          minWidth: "100px"
+          width: "max-content"
         }}
       >
         <Link href="/create">New Task</Link>
       </nav>
-      <h1>Tasks list:</h1>
+      <h1>Tasks:</h1>
 
       <TasksList
         tasks={tasks}
